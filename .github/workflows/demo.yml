@@ -15,8 +15,8 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
-      -  name: upload artificat
-        use:  actions/upload-artifact@v4
+      - name: upload artificat
+        uses:  actions/upload-artifact@v4
         with:
           name: dist-files
           path: |
