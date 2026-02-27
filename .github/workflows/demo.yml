@@ -15,6 +15,14 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
+      -  name: upload artificat
+        use:  actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: |
+            dist
+            package.json
+        
   build:
     needs: test
     runs-on: ubuntu-latest
