@@ -15,15 +15,7 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
-      - name: upload artificat
-        uses:  actions/upload-artifact@v4
-        with:
-          name: dist-files
-          path: dist
-          #  path: |
-          #   dist
-          #   package.json
-        
+  
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -34,9 +26,24 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      - name: upload artificat
+        uses:  actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist
+          #  path: |
+          #   dist
+          #   package.json
+        
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: download artificat
+        uses:  actions/download-artifact@v4
+        with:
+          name: dist-files
+      - name : output
+        run:  ls
       - name: Deploy
         run: echo "Deploying..."
