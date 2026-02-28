@@ -2,7 +2,9 @@ name: Detectar cambios en PR
 on:
   pull_request:
     branches:
-      - master # O tu rama principal
+      - main
+      - develop
+      - 'feature*' # ramas destino
 
 jobs:
   build:
