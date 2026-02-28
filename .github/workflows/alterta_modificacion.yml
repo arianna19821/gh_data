@@ -1,0 +1,24 @@
+name: Detectar cambios en PR
+on:
+  pull_request:
+    branches:
+      - master # O tu rama principal
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Listar archivos modificados
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Necesario para comparar ramas
+
+      - name: Obtener archivos modificados
+        id: changed-files
+        uses: tj-actions/changed-files@v44 # Asegúrate de usar la última versión
+
+      - name: Listar todos los archivos modificados
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file fue modificado."
+          done
